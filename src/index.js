@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const tableId = 8;
+const tableId = 1;
 
 ReactDOM.render(<App tableId={tableId}/>, document.getElementById('root'));
 
