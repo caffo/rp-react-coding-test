@@ -21,7 +21,7 @@ describe('Seats', () => {
     it('shows the username and stack', () => {
       component = shallow(<Seat {...props} />);
       expect(component.find('.username').text()).toEqual('Frank')
-      expect(component.find('.chips').text()).toEqual('12345')
+      expect(component.find('.chips').text()).toEqual('12,345')
     });
 
     xit('shows All-In when the player has bet all of their chips', () => {

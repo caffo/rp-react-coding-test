@@ -22,6 +22,19 @@
   line-height: 40px;
 }
 
+
+/* TODO: define layouts for every possible count of seats */
+.Seats-4 .Seat-0 { left: 200px; top: -250px; }
+.Seats-4 .Seat-1 { left: 200px; top: 300px; }
+.Seats-4 .Seat-2 { left: -200px; top: 300px; }
+.Seats-4 .Seat-3 { left: -200px; top: -250px; }
+
+.Seats-5 .Seat-0 { left: 200px; top: -250px; }
+.Seats-5 .Seat-1 { left: 470px; top: 50px; }
+.Seats-5 .Seat-2 { left: 200px; top: 300px; }
+.Seats-5 .Seat-3 { left: -200px; top: 300px; }
+.Seats-5 .Seat-4 { left: -200px; top: -250px; }
+
 .Seats-6 .Seat-0 { left: 200px; top: -250px; }
 .Seats-6 .Seat-1 { left: 470px; top: 50px; }
 .Seats-6 .Seat-2 { left: 200px; top: 300px; }

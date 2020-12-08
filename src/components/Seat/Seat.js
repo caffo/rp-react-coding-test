@@ -6,13 +6,15 @@ import Cards from '../Cards';
 import Chips from '../Chips';
 import './Seat.css';
 
+import thousandsSeparator from '../../utils/formatting/thousandsSeparator';
+
 const Seat = ({ id, state, username, chips, cards, bet }) => (
   <div className={cx('Seat', `Seat-${id}`)}>
     {
       username ? (
         <div className="nameplate">
           <div className="username">{username}</div>
-          <div className="chips">{(bet > 0 && chips < 0) ? 'All-In' : chips}</div>
+          <div className="chips">{(bet > 0 && chips < 0) ? 'All-In' : thousandsSeparator(chips)}</div>
         </div>
       ) : (
         <div className="nameplate available">
