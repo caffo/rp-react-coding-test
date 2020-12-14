@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import NumberFormat from 'react-number-format';
 
 import { seatProps } from '../../types';
 import Cards from '../Cards';
@@ -13,7 +12,7 @@ const Seat = ({ id, state, username, chips, cards, bet }) => (
       username ? (
         <div className="nameplate">
           <div className="username">{username}</div>
-          <div className="chips">{(bet > 0 && chips < 0) ? 'All-In' : <NumberFormat value={chips} displayType={'text'} thousandSeparator={true} />}</div>
+          <div className="chips">{(bet > 0 && chips < 0) ? 'All-In' : new Intl.NumberFormat().format(chips)}</div>
         </div>
       ) : (
         <div className="nameplate available">

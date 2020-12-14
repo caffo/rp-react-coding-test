@@ -8,6 +8,6 @@ describe('Chips', () => {
 
   it('shows seat available', () => {
     component = shallow(<Chips amount={1000} />);
-    expect(component.text()).toEqual('1000');
+    expect(component.text()).toEqual('1,000');
   });
 });

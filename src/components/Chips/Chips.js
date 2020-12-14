@@ -1,5 +1,4 @@
 import React from 'react';
-import NumberFormat from 'react-number-format';
 
 import './Chips.css';
 
@@ -9,7 +8,7 @@ const Chips = ({ amount }) => {
 
   return (
     <div className="Chips">
-      <NumberFormat value={amount} displayType={'text'} thousandSeparator={true} />
+      {new Intl.NumberFormat().format(amount)}
     </div>
   );
 }
