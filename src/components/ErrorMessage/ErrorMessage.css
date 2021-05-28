@@ -1,0 +1,12 @@
+.ErrorMessage {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
+
+.ErrorMessage > div {
+  background: red;
+  color: white;
+  border-radius: 4px;
+  padding: 16px;
+}
