@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './App.css';
+import ErrorMessage from './components/ErrorMessage';
+import Loading from './components/Loading';
 import Table from './components/Table';
 import { loadTable } from './slices/tableSlice';
 import { appShape } from './types';
@@ -16,8 +18,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        { isLoading && 'Loading...' }
-        { error && 'Error...' }
+        { isLoading && <Loading /> }
+        { error && <ErrorMessage message={error} /> }
         { table && <Table table={table} /> }
       </div>
     );
