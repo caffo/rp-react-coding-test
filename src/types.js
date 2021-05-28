@@ -40,3 +40,9 @@ export const tableShape = PropTypes.shape({
   seats: PropTypes.arrayOf(seatShape).isRequired,
   currentHand: handShape
 });
+
+export const appShape = PropTypes.shape({
+  isLoading: PropTypes.bool,
+  error: PropTypes.string,
+  table: tableShape,
+});
