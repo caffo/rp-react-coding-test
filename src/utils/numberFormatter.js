@@ -5,10 +5,9 @@ class NumberFormatter {
 
   init() {
     const htmlTag = document.querySelector('html');
-    if (!htmlTag) {
-      return;
-    }
-    const language = htmlTag.getAttribute('lang');
+    const language = htmlTag && htmlTag.hasAttribute('lang')
+      ? htmlTag.getAttribute('lang')
+      : 'en';
     this.intl = new Intl.NumberFormat(language);
   }
 
