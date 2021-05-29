@@ -51,7 +51,7 @@ export function loadComplete(table) {
   };
 }
 
-export function loadTable(id) {
+export function fetchTable(id) {
   return (dispatch) => {
     dispatch(load());
     return axios.get(`https://storage.googleapis.com/replaypoker-dummy-api/tables/${id}.json`)

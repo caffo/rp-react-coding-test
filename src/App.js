@@ -5,7 +5,7 @@ import './App.css';
 import ErrorMessage from './components/ErrorMessage';
 import Loading from './components/Loading';
 import Table from './components/Table';
-import { loadTable } from './slices/tableSlice';
+import { fetchTable } from './slices/tableSlice';
 import { appShape } from './types';
 
 class App extends Component {
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadTable: () => {
-      dispatch(loadTable(8));
+      dispatch(fetchTable(5));
     },
   };
 }
