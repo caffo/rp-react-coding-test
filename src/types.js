@@ -15,6 +15,7 @@ export const seatProps = {
   username: PropTypes.string,
   chips: PropTypes.number,
   fold: PropTypes.bool,
+  allIn: PropTypes.bool,
 };
 export const seatShape = PropTypes.shape(seatProps);
 

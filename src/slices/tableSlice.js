@@ -55,7 +55,20 @@ export function fetchTable(id) {
   return (dispatch) => {
     dispatch(load());
     return axios.get(`https://storage.googleapis.com/replaypoker-dummy-api/tables/${id}.json`)
-      .then(response => dispatch(loadComplete(response.data)))
+      .then(response => dispatch(loadComplete(parseTable(response.data))))
       .catch(error => dispatch(loadError(error.message)));
   }
+}
+
+function parseTable(table) {
+  if (table.currentHand) {
+    table.currentHand.players = table.currentHand.players.map(player => {
+      const seat = table.seats.find(seat => seat.id === player.seatId);
+      return {
+        ...player,
+        allIn: seat.chips === 0 && table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId)),
+      };
+    });
+  }
+  return table;
 }
