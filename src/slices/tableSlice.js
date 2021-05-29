@@ -69,6 +69,13 @@ function parseTable(table) {
         allIn: seat.chips === 0 && table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId)),
       };
     });
+    table.seats = table.seats.map(seat => {
+      const player = table.currentHand.players.find(player => player.seatId === seat.id);
+      return {
+        ...seat,
+        ...player,
+      };
+    });
   }
   return table;
 }
