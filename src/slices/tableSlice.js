@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const LOAD = 'table/load';
-const LOAD_COMPLETE = 'table/loadComplete';
-const LOAD_ERROR = 'table/loadError';
+const LOAD = 'poker-table/table/LOAD';
+const LOAD_COMPLETE = 'poker-table/table/LOAD_COMPLETE';
+const LOAD_ERROR = 'poker-table/table/LOAD_ERROR';
 
 export const initialState = {
   isLoading: false,
