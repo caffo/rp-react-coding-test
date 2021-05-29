@@ -14,6 +14,7 @@ export const seatProps = {
   state: PropTypes.oneOf(['available', 'occupied']).isRequired,
   username: PropTypes.string,
   chips: PropTypes.number,
+  fold: PropTypes.bool,
 };
 export const seatShape = PropTypes.shape(seatProps);
 

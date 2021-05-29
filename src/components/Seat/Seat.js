@@ -7,7 +7,7 @@ import Cards from '../Cards';
 import Chips from '../Chips';
 import './Seat.css';
 
-const Seat = ({ id, state, username, chips, cards, bet }) => (
+const Seat = ({ id, state, username, chips, cards, bet, fold }) => (
   <div className={cx('Seat', `Seat-${id}`)}>
     {
       username ? (
@@ -22,12 +22,10 @@ const Seat = ({ id, state, username, chips, cards, bet }) => (
       )
     }
     <Chips amount={bet} />
-    <Cards values={cards} />
+    { !fold && <Cards values={cards} /> }
   </div>
 );
 
-Seat.propTypes = {
-  ...seatProps,
-}
+Seat.propTypes = seatProps.isRequired;
 
 export default Seat;
