@@ -32,7 +32,7 @@ const handShape = PropTypes.shape({
 export const tableShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   state: PropTypes.oneOf(['open', 'closed']).isRequired,
-  game: PropTypes.oneOf(['holdem', 'omaha', 'royal']).isRequired,
+  game: PropTypes.oneOf(['holdem', 'omaha', 'omaha_hilo', 'royal']).isRequired,
   blinds: PropTypes.shape({
     small: PropTypes.number.isRequired,
     big: PropTypes.number.isRequired,
