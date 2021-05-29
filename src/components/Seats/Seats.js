@@ -6,7 +6,7 @@ import { seatShape } from '../../types';
 
 import Seat from '../Seat';
 
-const Seats = ({ seats, players }) => (
+const Seats = ({ seats }) => (
   <div className={cx('Seats', `Seats-${seats.length}`)}>
     { seats.map((seat) => <Seat key={seat.id} {...seat} />) }
   </div>

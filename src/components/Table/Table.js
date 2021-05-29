@@ -11,7 +11,7 @@ import './Table.css';
 const Table = ({ table }) => (
   <div className={cx('Table', `Table-${table.game}`)}>
     <div>
-      <Seats seats={table.seats} players={table.currentHand && table.currentHand.players} />
+      <Seats seats={table.seats} />
       { table.currentHand && <Cards values={table.currentHand.communityCards} /> }
       { table.currentHand && <Pots pots={table.currentHand.pots} /> }
     </div>
