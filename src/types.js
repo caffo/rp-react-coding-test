@@ -6,7 +6,7 @@ const cardType = PropTypes.string;
 const playerShape = PropTypes.shape({
   seatId: PropTypes.number.isRequired,
   bet: PropTypes.number.isRequired,
-  cards: PropTypes.arrayOf(cardType).isRequired,
+  cards: PropTypes.arrayOf(cardType),
 });
 
 export const seatProps = {
