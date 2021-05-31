@@ -67,7 +67,7 @@ function parseTable(table) {
 
   table.currentHand.players.forEach(player => {
     const seat = table.seats.find(seat => seat.id === player.seatId);
-    const allIn = seat.chips === 0 && table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId));
+    const allIn = seat.chips === 0 && (player.bet > 0 || table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId)));
     seat.allIn = allIn;
     seat.bet = player.bet;
     seat.cards = player.cards;
