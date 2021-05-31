@@ -45,7 +45,7 @@ describe('Seats', () => {
     });
   });
 
-  describe('unoccuped', () => {
+  describe('unoccupied', () => {
     it('shows seat available', () => {
       component = shallow(<Seat id={0} state="available" />);
       expect(component.find('.available').text()).toEqual('Seat Available');
