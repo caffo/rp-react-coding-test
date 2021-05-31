@@ -7,6 +7,7 @@ const playerShape = PropTypes.shape({
   seatId: PropTypes.number.isRequired,
   bet: PropTypes.number.isRequired,
   cards: PropTypes.arrayOf(cardType),
+  fold: PropTypes.bool,
 });
 
 export const seatProps = {
@@ -14,8 +15,12 @@ export const seatProps = {
   state: PropTypes.oneOf(['available', 'occupied']).isRequired,
   username: PropTypes.string,
   chips: PropTypes.number,
-  fold: PropTypes.bool,
+  // field computed when API data is loaded
   allIn: PropTypes.bool,
+  // merged fields from player
+  bet: PropTypes.number,
+  cards: PropTypes.arrayOf(cardType),
+  fold: PropTypes.bool,
 };
 export const seatShape = PropTypes.shape(seatProps);
 
