@@ -15,7 +15,7 @@ const data = {
     { id: 0, state: 'available' },
     { id: 1, state: 'occupied', username: 'MCA', chips: 0 },
     { id: 2, state: 'available' },
-    { id: 3, state: 'occupied', username: 'Mike D', chips: 57465 },
+    { id: 3, state: 'occupied', username: 'Mike D', chips: 0 },
     { id: 4, state: 'occupied', username: 'Ad-Rock', chips: 62860 },
     { id: 5, state: 'available' },
   ],
@@ -41,10 +41,17 @@ describe('fetchTable', () => {
   it('should fetch table data and parse it', () => {
     axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
 
-    const parsedData = { ...data};
-    parsedData.seats[1].player = { seatId: 1, bet: 0, cards: ['X', 'X'], allIn: true };
-    parsedData.seats[3].player = { seatId: 3, bet: 10, cards: ['X', 'X'] };
-    parsedData.seats[4].player = { seatId: 4, bet: 20, cards: ['Ac', '9d'] };
+    const parsedData = {
+      ...data,
+      seats: [
+        { id: 0, state: 'available' },
+        { id: 1, state: 'occupied', username: 'MCA', chips: 0, allIn: true, bet: 0, cards: ['X', 'X'] },
+        { id: 2, state: 'available' },
+        { id: 3, state: 'occupied', username: 'Mike D', chips: 0, allIn: true, bet: 10, cards: ['X', 'X'] },
+        { id: 4, state: 'occupied', username: 'Ad-Rock', chips: 62860, allIn: false, bet: 20, cards: ['Ac', '9d'] },
+        { id: 5, state: 'available' },
+      ]
+    };
 
     const expectedActions = [
       { type: 'poker-table/table/LOAD' },
