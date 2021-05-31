@@ -1,13 +1,13 @@
 .Card {
-  position: absolute;
+  position: relative;
   width: 70px;
+  float: left;
+  margin-right: 5px;
   top: -95px;
 }
 
-.Card:nth-child(1) { left: 0; }
-.Card:nth-child(2) { left: 75px; }
-
-.Table-omaha .Card:nth-child(1) { left: 0; }
-.Table-omaha .Card:nth-child(2) { left: 25px; }
-.Table-omaha .Card:nth-child(3) { left: 50px; }
-.Table-omaha .Card:nth-child(4) { left: 75px; }
+.Table-omaha .Seat .Card { position: absolute; }
+.Table-omaha .Seat .Card:nth-child(1) { left: 0; }
+.Table-omaha .Seat .Card:nth-child(2) { left: 25px; }
+.Table-omaha .Seat .Card:nth-child(3) { left: 50px; }
+.Table-omaha .Seat .Card:nth-child(4) { left: 75px; }
