@@ -61,21 +61,16 @@ export function fetchTable(id) {
 }
 
 function parseTable(table) {
-  if (table.currentHand) {
-    table.currentHand.players = table.currentHand.players.map(player => {
-      const seat = table.seats.find(seat => seat.id === player.seatId);
-      return {
-        ...player,
-        allIn: seat.chips === 0 && table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId)),
-      };
-    });
-    table.seats = table.seats.map(seat => {
-      const player = table.currentHand.players.find(player => player.seatId === seat.id);
-      return {
-        ...seat,
-        ...player,
-      };
-    });
+  if (!table.currentHand) {
+    return table;
   }
+
+  table.currentHand.players.forEach(player => {
+    const seat = table.seats.find(seat => seat.id === player.seatId);
+    const allIn = seat.chips === 0 && table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId));
+    seat.allIn = allIn;
+    seat.bet = player.bet;
+    seat.cards = player.cards;
+  });
   return table;
 }
