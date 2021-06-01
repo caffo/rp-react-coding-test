@@ -3,7 +3,9 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import tableReducer, { fetchTable, initialState, load, loadComplete, loadError } from './tableSlice';
 
-const data = {
+jest.mock('axios');
+
+const createMockData = () => ({
   id: 1,
   state: 'open',
   game: 'holdem',
@@ -31,27 +33,19 @@ const data = {
       { chips: 100, seatIds: [ 1 ] },
     ],
   },
-};
-
-jest.mock('axios');
+});
 
 const mockStore = configureMockStore([thunk]);
 
 describe('fetchTable', () => {
   it('should fetch table data and parse it', () => {
+    const data = createMockData();
     axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
 
-    const parsedData = {
-      ...data,
-      seats: [
-        { id: 0, state: 'available' },
-        { id: 1, state: 'occupied', username: 'MCA', chips: 0, allIn: true, bet: 0, cards: ['X', 'X'] },
-        { id: 2, state: 'available' },
-        { id: 3, state: 'occupied', username: 'Mike D', chips: 0, allIn: true, bet: 10, cards: ['X', 'X'] },
-        { id: 4, state: 'occupied', username: 'Ad-Rock', chips: 62860, allIn: false, bet: 20, cards: ['Ac', '9d'] },
-        { id: 5, state: 'available' },
-      ]
-    };
+    const parsedData = createMockData();
+    parsedData.seats[1] = { id: 1, state: 'occupied', username: 'MCA', chips: 0, allIn: true, bet: 0, cards: ['X', 'X'] };
+    parsedData.seats[3] = { id: 3, state: 'occupied', username: 'Mike D', chips: 0, allIn: true, bet: 10, cards: ['X', 'X'] };
+    parsedData.seats[4] = { id: 4, state: 'occupied', username: 'Ad-Rock', chips: 62860, allIn: false, bet: 20, cards: ['Ac', '9d'] };
 
     const expectedActions = [
       { type: 'poker-table/table/LOAD' },
