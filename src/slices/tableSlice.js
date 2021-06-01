@@ -73,7 +73,9 @@ function parseTable(table) {
     seat.allIn = allIn;
     seat.bet = player.bet;
     seat.cards = player.cards;
-    allCards.push(...player.cards);
+    if (player.cards) {
+      allCards.push(...player.cards);
+    }
   });
 
   const allVisibleCards = allCards.filter(card => card !== 'X');
