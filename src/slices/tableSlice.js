@@ -73,6 +73,7 @@ function parseTable(table) {
     seat.allIn = allIn;
     seat.bet = player.bet;
     seat.cards = player.cards;
+    seat.fold = player.fold;
     if (player.cards) {
       allCards.push(...player.cards);
     }
