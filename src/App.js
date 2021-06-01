@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadTable: () => {
-      dispatch(fetchTable(2));
+      dispatch(fetchTable(7));
     },
   };
 }
