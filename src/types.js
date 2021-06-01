@@ -6,7 +6,8 @@ const cardType = PropTypes.string;
 const playerShape = PropTypes.shape({
   seatId: PropTypes.number.isRequired,
   bet: PropTypes.number.isRequired,
-  cards: PropTypes.arrayOf(cardType).isRequired,
+  cards: PropTypes.arrayOf(cardType),
+  fold: PropTypes.bool,
 });
 
 export const seatProps = {
@@ -14,6 +15,12 @@ export const seatProps = {
   state: PropTypes.oneOf(['available', 'occupied']).isRequired,
   username: PropTypes.string,
   chips: PropTypes.number,
+  // field computed when API data is loaded
+  allIn: PropTypes.bool,
+  // merged fields from player
+  bet: PropTypes.number,
+  cards: PropTypes.arrayOf(cardType),
+  fold: PropTypes.bool,
 };
 export const seatShape = PropTypes.shape(seatProps);
 
@@ -32,7 +39,7 @@ const handShape = PropTypes.shape({
 export const tableShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   state: PropTypes.oneOf(['open', 'closed']).isRequired,
-  game: PropTypes.oneOf(['holdem', 'omaha', 'royal']).isRequired,
+  game: PropTypes.oneOf(['holdem', 'omaha', 'omaha_hilo', 'royal']).isRequired,
   blinds: PropTypes.shape({
     small: PropTypes.number.isRequired,
     big: PropTypes.number.isRequired,

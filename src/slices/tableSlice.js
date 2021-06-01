@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const LOAD = 'table/load';
-const LOAD_COMPLETE = 'table/loadComplete';
-const LOAD_ERROR = 'table/loadError';
+const LOAD = 'poker-table/table/LOAD';
+const LOAD_COMPLETE = 'poker-table/table/LOAD_COMPLETE';
+const LOAD_ERROR = 'poker-table/table/LOAD_ERROR';
 
 export const initialState = {
   isLoading: false,
@@ -51,11 +51,39 @@ export function loadComplete(table) {
   };
 }
 
-export function loadTable(id) {
+export function fetchTable(id) {
   return (dispatch) => {
     dispatch(load());
     return axios.get(`https://storage.googleapis.com/replaypoker-dummy-api/tables/${id}.json`)
-      .then(response => dispatch(loadComplete(response.data)))
+      .then(response => dispatch(loadComplete(parseTable(response.data))))
       .catch(error => dispatch(loadError(error.message)));
   }
+}
+
+function parseTable(table) {
+  if (!table.currentHand) {
+    return table;
+  }
+
+  const allCards = [...table.currentHand.communityCards];
+
+  table.currentHand.players.forEach(player => {
+    const seat = table.seats.find(seat => seat.id === player.seatId);
+    const allIn = seat.chips === 0 && (player.bet > 0 || table.currentHand.pots.some(pot => pot.seatIds.includes(player.seatId)));
+    seat.allIn = allIn;
+    seat.bet = player.bet;
+    seat.cards = player.cards;
+    seat.fold = player.fold;
+    if (player.cards) {
+      allCards.push(...player.cards);
+    }
+  });
+
+  const allVisibleCards = allCards.filter(card => card !== 'X');
+  const uniqueCards = new Set(allVisibleCards);
+  if (allVisibleCards.length !== uniqueCards.size) {
+    throw new Error('Invalid game state!');
+  }
+
+  return table;
 }

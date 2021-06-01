@@ -7,13 +7,13 @@ import Cards from '../Cards';
 import Chips from '../Chips';
 import './Seat.css';
 
-const Seat = ({ id, state, username, chips, cards, bet }) => (
+const Seat = ({ id, state, username, chips, cards, bet, fold, allIn }) => (
   <div className={cx('Seat', `Seat-${id}`)}>
     {
       username ? (
         <div className="nameplate">
           <div className="username">{username}</div>
-          <div className="chips">{(bet > 0 && chips < 0) ? 'All-In' : numberFormatter.format(chips)}</div>
+          <div className="chips">{allIn ? 'All-In' : numberFormatter.format(chips)}</div>
         </div>
       ) : (
         <div className="nameplate available">
@@ -22,12 +22,10 @@ const Seat = ({ id, state, username, chips, cards, bet }) => (
       )
     }
     <Chips amount={bet} />
-    <Cards values={cards} />
+    { !fold && <Cards values={cards} /> }
   </div>
 );
 
-Seat.propTypes = {
-  ...seatProps,
-}
+Seat.propTypes = seatProps.isRequired;
 
 export default Seat;
