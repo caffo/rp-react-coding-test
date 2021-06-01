@@ -57,6 +57,22 @@ describe('fetchTable', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  it('should throw error if data contains duplicate cards', () => {
+    const data = createMockData();
+    data.currentHand.communityCards = ['Ac', '9c'];
+    axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
+
+    const expectedActions = [
+      { type: 'poker-table/table/LOAD' },
+      { type: 'poker-table/table/LOAD_ERROR', payload: 'Invalid game state!' },
+    ];
+
+    const store = mockStore({});
+    return store.dispatch(fetchTable(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });
 
 describe('tableReducer', () => {
