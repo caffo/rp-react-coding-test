@@ -24,8 +24,8 @@ describe('Seats', () => {
       expect(component.find('.chips').text()).toEqual('12345')
     });
 
-    xit('shows All-In when the player has bet all of their chips', () => {
-      component = shallow(<Seat {...props} chips={0} />);
+    it('shows All-In when the player has bet all of their chips', () => {
+      component = shallow(<Seat {...props} allIn={true} />);
       expect(component.find('.chips').text()).toEqual('All-In')
     });
 
@@ -37,10 +37,15 @@ describe('Seats', () => {
     it('shows the hole cards', () => {
       component = shallow(<Seat {...props} />);
       expect(component.find(Cards).props()).toEqual({ values: ['Ac', 'As'] });
-    })
+    });
+
+    it('hides cards if folded', () => {
+      component = shallow(<Seat {...props} fold={true} />);
+      expect(component.find(Cards).length).toEqual(0);
+    });
   });
 
-  describe('unoccuped', () => {
+  describe('unoccupied', () => {
     it('shows seat available', () => {
       component = shallow(<Seat id={0} state="available" />);
       expect(component.find('.available').text()).toEqual('Seat Available');

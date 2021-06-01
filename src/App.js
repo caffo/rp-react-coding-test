@@ -1,24 +1,47 @@
 import React, { Component } from 'react';
-import { tableShape } from './types';
-
-import Table from './components/Table';
+import { connect } from 'react-redux';
 
 import './App.css';
+import ErrorMessage from './components/ErrorMessage';
+import Loading from './components/Loading';
+import Table from './components/Table';
+import { fetchTable } from './slices/tableSlice';
+import { appShape } from './types';
 
 class App extends Component {
-  static propTypes = {
-    table: tableShape.isRequired,
+  componentDidMount() {
+    this.props.loadTable();
   }
 
   render() {
-    const { table } = this.props;
+    const { isLoading, error, table } = this.props;
 
     return (
       <div className="App">
-        <Table table={table} />
+        { isLoading && <Loading /> }
+        { error && <ErrorMessage message={error} /> }
+        { table && <Table table={table} /> }
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes = appShape.isRequired;
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.table.isLoading,
+    error: state.table.error,
+    table: state.table.table,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadTable: () => {
+      dispatch(fetchTable(1));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

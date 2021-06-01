@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { store } from './store';
+import { numberFormatter } from './utils/numberFormatter';
 
-// TODO: Retrieve this data from the API rather than a fixture
-import table from './data/table-1'
-
-ReactDOM.render(<App table={table} />, document.getElementById('root'));
+numberFormatter.init();
+ReactDOM.render(
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

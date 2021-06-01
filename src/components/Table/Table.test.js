@@ -10,18 +10,22 @@ import data from '../../data/table-1';
 describe('Table', () => {
   let component;
 
-  it('renders Seats', () => {
+  it('renders Table with Seats, Pots, Cards, and correct class name', () => {
     component = shallow(<Table table={data} />);
     expect(component.find(Seats).length).toEqual(1);
-  });
-
-  it('renders Pots', () => {
-    component = shallow(<Table table={data} />);
     expect(component.find(Pots).length).toEqual(1);
+    expect(component.find(Cards).length).toEqual(1);
+    expect(component.hasClass('Table-holdem')).toEqual(true);
   });
 
-  it('renders Cards', () => {
-    component = shallow(<Table table={data} />);
-    expect(component.find(Cards).length).toEqual(1);
+  it('renders Table without currentHand', () => {
+    const dataWithoutCurrentHand = {
+      ...data,
+      currentHand: undefined,
+    };
+    component = shallow(<Table table={dataWithoutCurrentHand} />);
+    expect(component.find(Seats).length).toEqual(1);
+    expect(component.find(Pots).length).toEqual(0);
+    expect(component.find(Cards).length).toEqual(0);
   });
 });

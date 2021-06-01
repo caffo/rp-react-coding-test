@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Chips.css';
+import { numberFormatter } from '../../utils/numberFormatter';
 
 // TODO: Show actual chips rather than just text
 const Chips = ({ amount }) => {
@@ -8,7 +9,7 @@ const Chips = ({ amount }) => {
 
   return (
     <div className="Chips">
-      {amount}
+      {numberFormatter.format(amount)}
     </div>
   );
 }
